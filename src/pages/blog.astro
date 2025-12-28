@@ -1,8 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
 const pageTitle = "Mi blog de aprendizaje sobre Astro";
-const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+const allPosts = await getCollection('blog');
 ---
 
 <BaseLayout pageTitle={pageTitle}>
