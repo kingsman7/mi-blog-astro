@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+---
+<BaseLayout pageTitle={frontmatter.title}>
+    <p>{frontmatter.pubDate.toString().slice(0,10)}</p>
+    <p><em>{frontmatter.description}</em></p>
+    <p>Escrito por: {frontmatter.author}</p>
+    <Image 
+        transition:name={`img-${frontmatter.title}`} 
+        src={frontmatter.image.url} 
+        inferSize={true}
+        width={300}
+        height={220}
+        alt={frontmatter.image.alt} 
+    />
+    <section aria-label="Tags">
+        <div class="tags">
+            {frontmatter.tags.map((tag: string) => (
+                <a class="tag" href={`/tags/${tag}`}>{tag}</a>
+            ))}
+        </div>
+    </section>
+</BaseLayout>
+
+<style is:global>
+    a {
+    color: #00539F;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: .5em;
+    padding: .5em 1em;
+    font-size: 1.15em;
+    background-color: #F8FCFD;
+  }
+</style>

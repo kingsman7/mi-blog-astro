@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+const { post } = Astro.props;
+---
+<li>
+    <a href={post.url}>
+        <div class="posts">
+            <Image
+                transition:name={`img-${post.frontmatter.title}`}
+                src={post.frontmatter.image.url} 
+                inferSize={true}
+                alt={post.frontmatter.image.alt} 
+                width={200}
+                height={120}
+            />
+            {post.frontmatter.title}
+        </div>
+    </a>
+</li>
